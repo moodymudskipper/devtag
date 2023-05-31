@@ -9,3 +9,5 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 Imports: 
     roxygen2
+URL: https://github.com/moodymudskipper/devtag
+BugReports: https://github.com/moodymudskipper/devtag/issues
