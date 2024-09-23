@@ -38,7 +38,7 @@ pak::pak("moodymudskipper/devtag")
 To use {devtag} :
 
 (1) Use "@dev" for unexported functions where you would have used "@export" for
-exported functions.
+exported functions. Do not use "@rdname".
 
 (2) Run `devtag::use_devtag()` in your package folder. This will amend the 
 `DESCRIPTION` to activate devtag usage.

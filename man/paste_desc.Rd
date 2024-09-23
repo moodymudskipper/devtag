@@ -22,3 +22,4 @@ paste_desc(NA, 1)
 paste_desc(1, 1)
 paste_desc(2, 1)
 }
+\keyword{internal}
