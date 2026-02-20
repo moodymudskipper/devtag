@@ -33,21 +33,31 @@ roclet_output.roclet_dev <- function(x, results, base_path, ...) {
   }
 
   # .Rbuildignore
-  ignored <- readLines(".Rbuildignore")
-  dev_files <- file.path("^man", paste0(nice_name(dev_topics), "\\.Rd$"))
-  ignored <- grep("^\\^man/.*\\.Rd\\$$", ignored, invert = TRUE, value = TRUE)
-  writeLines(c(ignored, dev_files), ".Rbuildignore")
+  current_ignored <- readLines(file.path(base_path, ".Rbuildignore"))
+  dev_files <- unique(file.path(
+    "^man",
+    paste0(nice_name(dev_topics), "\\.Rd$")
+  ))
+  ignored <- grep(
+    "^\\^man/.*\\.Rd\\$$",
+    current_ignored,
+    invert = TRUE,
+    value = TRUE
+  )
+  if (length(ignored) == 0) {
+    writeLines(c(ignored, dev_files), file.path(base_path, ".Rbuildignore"))
+  }
 
   ## \keyword{internal}
-  lapply(dev_topics, add_keyword_internal)
+  lapply(dev_topics, add_keyword_internal, base_path = base_path)
 }
 
 block_has_dev <- function(x) {
   "dev" %in% sapply(x$tags, function(x) x[["tag"]])
 }
 
-add_keyword_internal <- function(topic) {
-  path <- file.path("man", paste0(nice_name(topic), ".Rd"))
+add_keyword_internal <- function(topic, base_path) {
+  path <- file.path(base_path, "man", paste0(nice_name(topic), ".Rd"))
   lines <- readLines(path)
   lines <- c(lines, "\\keyword{internal}")
   writeLines(lines, path)
