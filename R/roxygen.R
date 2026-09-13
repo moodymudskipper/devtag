@@ -5,7 +5,7 @@
 #' @export
 #' @importFrom roxygen2 roxy_tag_parse
 roxy_tag_parse.roxy_tag_dev <- function(x) {
-  roxygen2::tag_words_line(x)
+  roxygen2::tag_words(x)
 }
 
 #' @export
